@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "fastapi_restapi_microservise"
+version = "0.1.0"
+description = ""
+authors = ["Fischer0007 <nikitacebotov0@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "*"
+uvicorn = "*"
+psycopg2 = "*"
+sqlalchemy = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+flake8 = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
