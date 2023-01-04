@@ -1,4 +1,4 @@
- <h1 align="center">Fastapi - REST API - Microservise</h1>
+ <h1 align="center">Fastapi - REST API Microservise</h1>
  
  ## Requirements
 
