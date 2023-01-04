@@ -2,8 +2,8 @@
  
  ## Requirements
 
-- [Docker >=  20.10.20] (https://docs.docker.com/engine/install/ubuntu/)
-- [PostgreSQL >= 14] (https://www.postgresql.org/download/linux/ubuntu/)
+- [Docker >=  20.10.20](https://docs.docker.com/engine/install/ubuntu/)
+- [PostgreSQL >= 14](https://www.postgresql.org/download/linux/ubuntu/)
 - [Python >= 3.10](https://www.python.org/downloads/release/python-3100/)
 - [Poetry](https://github.com/python-poetry/poetry) 
  
