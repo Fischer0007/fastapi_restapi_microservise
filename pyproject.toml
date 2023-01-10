@@ -12,6 +12,7 @@ uvicorn = "*"
 psycopg2 = "*"
 psycopg2-binary = "2.9.5"
 sqlalchemy = "*"
+python-multipart = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"

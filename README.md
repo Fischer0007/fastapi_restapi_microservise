@@ -39,6 +39,11 @@ sudo apt-get -y install postgresql-14
 
 ### Poetry
 
+Install Poetry:
+
+```shell
+pip install poetry
+```
 
 Create the virtual environment and install dependencies with:
 

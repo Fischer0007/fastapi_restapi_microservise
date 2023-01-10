@@ -1,9 +1,11 @@
+import re
 from typing import Optional
+from fastapi import Form
 from pydantic import BaseModel, validator, PastDate
 
 
 class StatisticsBase(BaseModel):
-    date: PastDate
+    date: Optional[PastDate]
     views: Optional[int]
     clicks: Optional[int]
     cost: Optional[float]
@@ -31,3 +33,15 @@ class StatisticsBase(BaseModel):
         if len(str(v).split('.')[1]) > 2:
             raise ValueError('must have 2 decimal places')
         return v
+
+
+class ShowStatistics(BaseModel):
+    date_from: Optional[str]
+    date_to: Optional[str]
+
+    @validator('date_from', 'date_to', check_fields=False)
+    def date_format(cls, v):
+        if re.fullmatch(r'^\d{4}\-\d\d\-\d\d$', v):
+            return v
+        raise ValueError('must match the format date')
+        

@@ -1,10 +1,10 @@
 
+import fastapi
 from db_app import models
-from db_app.db import engine, SessionLocal
-# from datetime import datetime
+from db_app.db import engine, SessionLocal, Base
 from db_app import schemas
 
-from fastapi import FastAPI
+from fastapi import FastAPI, requests, Request, Form, Path
 from starlette import status
 from starlette.responses import Response
 from fastapi.openapi.docs import (
@@ -60,21 +60,34 @@ async def saving_statistics(item: schemas.StatisticsBase):
     db.add(new_entry)
     db.commit()
     db.refresh(new_entry)
-    return Response(status_code=status.HTTP_201_CREATED), {"date": item.date, "views":item.views,
+    return Response(status_code=status.HTTP_201_CREATED), {"date": item.date, "views": item.views,
                                                            "clicks": item.clicks, "cost": item.cost
                                                            }
 
 
-@app.get("/show_statistics/")
-def show_statistics(f_rom, to):
-    pass
+@app.post(f"/show_statistics/")
+async def show_statistics(date_from: str = Form(regex=r'^\d{4}\-\d\d\-\d\d$'),
+                          date_to: str = Form(regex=r'^\d{4}\-\d\d\-\d\d$')):
+    db = SessionLocal()
+    mydate = db.query(models.Statistics).filter(models.Statistics.date >= date_from).\
+        filter(models.Statistics.date <= date_to)
+    list_response = []
+    for i in mydate:
+        list.append(i)
+    # print(*list_response, sep='\n')
+    response = list_response
+    return Response(status_code=status.HTTP_200_OK), response
 
 
 @app.get("/reset_statistics/")
 def reset_statistics():
-    pass
+    db = SessionLocal()
+    db.query(models.Statistics).delete()
+    db.commit()
+    return Response(status_code=status.HTTP_200_OK), "Статистика сброшена"
 
 
-@app.get("/delete_statistics/")
-def reset_statistics():
-    pass
+@app.get("/clearn_statistics/")
+def clearn_statistics():
+    Base.metadata.drop_all(engine)
+    return Response(status_code=status.HTTP_200_OK), "Таблица со статистикой удалена"
